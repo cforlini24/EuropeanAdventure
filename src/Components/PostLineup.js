@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const PostLineup = (props) => {
   const { fetchLineups } = props;
@@ -74,7 +74,7 @@ const PostLineup = (props) => {
           name="standSpot"
         />
         {posLoaded ? (
-          <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" />
+          <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position image preview"/>
         ) : (
           ""
         )}
@@ -89,7 +89,7 @@ const PostLineup = (props) => {
           id="aimSpot"
         />
         {aimLoaded ? (
-          <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" />
+          <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" alt="Uploaded aim image preview"/>
         ) : (
           ""
         )}

@@ -2,4 +2,4 @@
 - Form validation
 - More styling
 - Indv. page layout
-- 
+- Figure out how to sperate CT and T 
