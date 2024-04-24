@@ -1,0 +1,5 @@
+- Add lineups
+- Form validation
+- More styling
+- Indv. page layout
+- 
