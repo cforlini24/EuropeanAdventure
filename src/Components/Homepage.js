@@ -1,0 +1,123 @@
+import { Link } from "react-router-dom";
+
+const Homepage = () => {
+  return (
+    <div className="row m-5">
+      <div className="col-10">
+        <h2>Maps</h2>
+        <div className="row row-cols-4 g-3">
+          <div className="col ">
+            <Link to={"/nuke"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/nuke_poster_6564251e83.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Nuke</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/anubis"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/anubis_poster_70252beb41.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Anubis</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/mirage"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/mirage_poster_a0e8dff716.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Mirage</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/ancient"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/ancient_poster_6d7fc66b2a.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Ancient</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/inferno"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/inferno_poster_a627839fc2.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Inferno</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/overpass"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/overpass_poster_99828cd53e.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Overpass</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col ">
+            <Link to={"/vertigo"}>
+              <div className="card">
+                <img
+                  className="card-img"
+                  src="https://assets.csnades.gg/vertigo_poster_63b445c1dd.webp"
+                />
+                <div className="card-img-overlay text-center">
+                  <h2>Vertigo</h2>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="col-2">
+        <h2>About</h2>
+        <p>
+          Welcome to Lini's Lineups, the best place to learn Counter-Strike 2
+          grenade lineups.
+        </p>
+        <p>
+          Find guides and all the best nades: smokes, molotovs, flashbangs, and
+          HE grenades.
+        </p>
+        <Link to={"/upload"}>
+          <button className="btn btn-outline-primary ">
+            <i className="bi bi-file-arrow-up mx-2"></i>
+            Add your own lineup
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Homepage;
