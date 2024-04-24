@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PostLineup = (props) => {
   const { fetchLineups } = props;
@@ -10,9 +10,11 @@ const PostLineup = (props) => {
   const [posLoaded, setPosLoaded] = useState(false);
   const [aimPreview, setAimPreview] = useState();
   const [posPreview, setPosPreview] = useState();
-  const [counterTerror, setCounterTerror] = useState(true);
-  const [map, setMap] = useState("Mirage");
+  const [counterTerror, setCounterTerror] = useState();
+  const [map, setMap] = useState();
   const [desc, setDesc] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState();
 
   function previewAim(e) {
     const file = e.target.files[0];
@@ -34,30 +36,35 @@ const PostLineup = (props) => {
   }
 
   async function postLineup() {
-    console.log(
-      JSON.stringify({
-        map,
-        ct: counterTerror,
-        aimImage64: aimPreview,
-        positionImage64: posPreview,
-        desc,
-      })
-    );
-    const response = await fetch("http://localhost:3001/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        map,
-        ct: counterTerror,
-        aimImage64: aimPreview,
-        posImage64: posPreview,
-        desc,
-      }),
-    });
-    fetchLineups();
-    naviagte("/");
+    if (!map) {
+      setErrorMessage("Please select a map.");
+    }else if(!desc) {
+      setErrorMessage("Please provide a description.");
+    }else if(!aimPreview) {
+      setErrorMessage("Please provide an aim image.");
+    }else if(!posPreview) {
+      setErrorMessage("Please select a position image.");
+    } else {
+      const response = await fetch("http://localhost:3001/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          map,
+          ct: counterTerror,
+          aimImage64: aimPreview,
+          posImage64: posPreview,
+          desc,
+        }),
+      });
+      if(response.status === 200) {
+        fetchLineups();
+        naviagte("/");
+      }else {
+        setErrorMessage("Error, please see console.");
+      }
+    }
   }
 
   return (
@@ -74,7 +81,7 @@ const PostLineup = (props) => {
           name="standSpot"
         />
         {posLoaded ? (
-          <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position image preview"/>
+          <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position preview" />
         ) : (
           ""
         )}
@@ -89,7 +96,7 @@ const PostLineup = (props) => {
           id="aimSpot"
         />
         {aimLoaded ? (
-          <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" alt="Uploaded aim image preview"/>
+          <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" alt="Uploaded aim preview" />
         ) : (
           ""
         )}
@@ -112,11 +119,11 @@ const PostLineup = (props) => {
           <div className="col-6">
             <select
               onChange={(e) => {
-                if(e.target.value == "CT") {
+                if (e.target.value === "CT") {
                   setCounterTerror(true);
-                }else if(e.target.value == "T") {
+                } else if (e.target.value === "T") {
                   setCounterTerror(false);
-                }else {
+                } else {
                   setCounterTerror();
                 }
               }}
@@ -133,6 +140,9 @@ const PostLineup = (props) => {
           onChange={(e) => setDesc(e.target.value)}
           className="form-control mb-2 col-12"
         ></textarea>
+        {
+          errorMessage ? <p className="error-message">{errorMessage}</p> : ""
+        }
         <button onClick={postLineup} className="btn btn-primary">
           Submit
         </button>
