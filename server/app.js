@@ -21,10 +21,8 @@ app.get("/", async(req, res) => {
 })
 
 const port = 3001;
-app.listen(port, async () => {
-    await mongoose.connect("mongodb+srv://cforlini24:PL6Ng6LlmdHFdLjS@cluster0.igszgpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+const MONGO_URI = "mongodb+srv://cforlini24:PL6Ng6LlmdHFdLjS@cluster0.igszgpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+mongoose.connect(MONGO_URI).then(() => {app.listen(port, () => {
     console.log(`Server is running on port ${port} and connected to mongo!`);
-})
-
-
-// mongodb+srv://cforlini24:PL6Ng6LlmdHFdLjS@cluster0.igszgpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+})})
