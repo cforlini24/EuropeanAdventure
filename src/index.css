@@ -13,10 +13,17 @@
   color: white;
   &:hover {
     box-shadow: 2px 2px 5px black;
+    scale: 1.025;
   }
 }
 
-body{
-    background-color: rgb(26, 26, 26);
-    color: white;
+body {
+  background: rgb(50, 46, 112);
+  background: linear-gradient(
+    90deg,
+    rgba(50, 46, 112, 1) 0%,
+    rgba(108, 9, 121, 1) 38%,
+    rgba(255, 134, 0, 1) 100%
+  );
+  color: white;
 }

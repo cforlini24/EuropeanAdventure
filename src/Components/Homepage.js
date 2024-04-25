@@ -6,9 +6,9 @@ const Homepage = () => {
       <div className="col-10">
         <h2>Maps</h2>
         <div className="row row-cols-4 g-3">
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" >
             <Link to={"/nuke"}>
-              <div className="card">
+              <div className="card" >
                 <img
                   className="card-img"
                   src="https://assets.csnades.gg/nuke_poster_6564251e83.webp"
@@ -20,7 +20,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="50">
             <Link to={"/anubis"}>
               <div className="card">
                 <img
@@ -34,7 +34,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="100">
             <Link to={"/mirage"}>
               <div className="card">
                 <img
@@ -48,7 +48,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="150">
             <Link to={"/ancient"}>
               <div className="card">
                 <img
@@ -62,7 +62,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="200">
             <Link to={"/inferno"}>
               <div className="card">
                 <img
@@ -76,7 +76,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="250">
             <Link to={"/overpass"}>
               <div className="card">
                 <img
@@ -90,7 +90,7 @@ const Homepage = () => {
               </div>
             </Link>
           </div>
-          <div className="col ">
+          <div className="col "  data-aos="fade-up"  data-bs-duration="800" data-aos-delay="300">
             <Link to={"/vertigo"}>
               <div className="card">
                 <img
