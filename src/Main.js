@@ -16,54 +16,117 @@ function Main() {
   const [inferno, setInferno] = useState('');
   const [overpass, setOverpass] = useState('');
   const [vertigo, setVertigo] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [ancientLoading, setAncientLoading] = useState(true);
+  const [infernoLoading, setInfernoLoading] = useState(true);
+  const [overpassLoading, setOverpassLoading] = useState(true);
+  const [vertigoLoading, setVertigoLoading] = useState(true);
+  const [mirageLoading,setMirageLoading] = useState(true);
+  const [nukeLoading, setNukeLoading] = useState(true);
+  const [anubisLoading, setAnubisLoading] = useState(true);
 
 
-    async function fetchLineups() {
+    async function fetchNuke() {
       try {
-        const repsonse = await fetch("http://localhost:3001")
+        const repsonse = await fetch("http://localhost:3001/nuke")
         const data = await repsonse.json();
-        setLineups(data);
-        setLoading(false);
+        setNuke(data);
+        setNukeLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchAnubis() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Anubis")
+        const data = await repsonse.json();
+        setAnubis(data);
+        setAnubisLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchMirage() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Mirage")
+        const data = await repsonse.json();
+        setMirage(data);
+        setMirageLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchAncient() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Ancient")
+        const data = await repsonse.json();
+        setAncient(data);
+        setAncientLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchOverpass() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Overpass")
+        const data = await repsonse.json();
+        setOverpass(data);
+        setOverpassLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchInferno() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Inferno")
+        const data = await repsonse.json();
+        setInferno(data);
+        setInfernoLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function fetchVertigo() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/Vertigo")
+        const data = await repsonse.json();
+        setVertigo(data);
+        setVertigoLoading(false);
       } catch (error) {
         console.log(error)
       }
     }
 
-    function filterLineups() {
-      setMirage(lineups.filter((lineup) => lineup.map == "Mirage"));
-      setAnubis(lineups.filter((lineup) => lineup.map == "Anubis"));
-      setNuke(lineups.filter((lineup) => lineup.map == "Nuke"));
-      setAncient(lineups.filter((lineup) => lineup.map == "Ancient"));
-      setInferno(lineups.filter((lineup) => lineup.map == "Inferno"));
-      setOverpass(lineups.filter((lineup) => lineup.map == "Overpass"));
-      setVertigo(lineups.filter((lineup) => lineup.map == "Vertigo"));
-    }
 
     useEffect(()=> {
-      fetchLineups();
+      fetchNuke();
+      fetchOverpass();
+      fetchAncient();
+      fetchInferno();
+      fetchMirage();
+      fetchVertigo();
+      fetchAnubis();
   },[])
 
-  useEffect(() => {
-    if(lineups) {
-      filterLineups()
-    }
-  }, [lineups])
+  // useEffect(() => {
+  //   if(lineups) {
+  //     filterLineups()
+  //   }
+  // }, [lineups])
 
   return (
     <BrowserRouter>
     <Navbar />
       <Routes>
         <Route path="/" element={<Homepage/>}/>
-        <Route path="/upload" element={<PostLineup fetchLineups={fetchLineups}/>} />
-        <Route path="/nuke" element={<Lineup lineups={nuke} setLineups={setLineups} loading={loading} map={"Nuke"}/>}/>
-        <Route path="/anubis" element={<Lineup lineups={anubis}  setLineups={setLineups} loading={loading} map={"Anubis"}/>}/>
-        <Route path="/mirage" element={<Lineup lineups={mirage} setLineups={setLineups} loading={loading} map={"Mirage"}/>}/>
-        <Route path="/ancient" element={<Lineup lineups={ancient} setLineups={setLineups} loading={loading} map={"Ancient"}/>}/>
-        <Route path="/inferno" element={<Lineup lineups={inferno} setLineups={setLineups} loading={loading} map={"Inferno"}/>}/>
-        <Route path="/overpass" element={<Lineup lineups={overpass} setLineups={setLineups} loading={loading} map={"Overpass"}/>}/>
-        <Route path="/vertigo" element={<Lineup lineups={vertigo} setLineups={setLineups} loading={loading} map={"Vertigo"}/>}/>
-        <Route path="/edit/:id" element={<EditForm lineups={lineups} fetchLineups={fetchLineups} />} />
+        {/* <Route path="/upload" element={<PostLineup fetchLineups={fetchLineups}/>} /> */}
+        <Route path="/nuke" element={<Lineup lineups={nuke} setLineups={setLineups} loading={nukeLoading} map={"Nuke"}/>}/>
+        <Route path="/anubis" element={<Lineup lineups={anubis}  setLineups={setLineups} loading={anubisLoading} map={"Anubis"}/>}/>
+        <Route path="/mirage" element={<Lineup lineups={mirage} setLineups={setLineups} loading={mirageLoading} map={"Mirage"}/>}/>
+        <Route path="/ancient" element={<Lineup lineups={ancient} setLineups={setLineups} loading={ancientLoading} map={"Ancient"}/>}/>
+        <Route path="/inferno" element={<Lineup lineups={inferno} setLineups={setLineups} loading={infernoLoading} map={"Inferno"}/>}/>
+        <Route path="/overpass" element={<Lineup lineups={overpass} setLineups={setLineups} loading={overpassLoading} map={"Overpass"}/>}/>
+        <Route path="/vertigo" element={<Lineup lineups={vertigo} setLineups={setLineups} loading={vertigoLoading} map={"Vertigo"}/>}/>
+        {/* <Route path="/edit/:id" element={<EditForm lineups={lineups} fetchLineups={fetchLineups} />} /> */}
         <Route path="/style" element={<Styling />}/>
       </Routes>
     </BrowserRouter>

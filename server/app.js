@@ -27,6 +27,26 @@ app.get("/nuke", async (req, res) => {
     const lineups = await Lineup.find({map: "Nuke"})
     res.send(lineups)
 })
+app.get("/Overpass", async (req, res) => {
+    const lineups = await Lineup.find({map: "Overpass"})
+    res.send(lineups)
+})
+app.get("/Mirage", async (req, res) => {
+    const lineups = await Lineup.find({map: "Mirage"})
+    res.send(lineups)
+})
+app.get("/Vertigo", async (req, res) => {
+    const lineups = await Lineup.find({map: "Vertigo"})
+    res.send(lineups)
+})
+app.get("/Inferno", async (req, res) => {
+    const lineups = await Lineup.find({map: "Inferno"})
+    res.send(lineups)
+})
+app.get("/Ancient", async (req, res) => {
+    const lineups = await Lineup.find({map: "Ancient"})
+    res.send(lineups)
+})
 
 app.patch("/:id", async (req, res) => {
     const {id} = req.params;
