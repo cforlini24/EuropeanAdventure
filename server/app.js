@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json({limit: "50mb"}));
 
 app.post("/", async (req, res)=> {
-    console.log(req.body);
     const lineup = new Lineup(req.body);
     await lineup.save()
     res.send();
@@ -18,6 +17,33 @@ app.post("/", async (req, res)=> {
 app.get("/", async(req, res) => {
     const lineups = await Lineup.find();
     res.send(lineups);
+})
+
+app.get("/anubis", async (req, res) => {
+    const lineups = await Lineup.find({map: "Anubis"})
+    res.send(lineups)
+})
+app.get("/nuke", async (req, res) => {
+    const lineups = await Lineup.find({map: "Nuke"})
+    res.send(lineups)
+})
+
+app.patch("/:id", async (req, res) => {
+    const {id} = req.params;
+    const lineup = await Lineup.findById(id);
+    lineup.overwrite(req.body);
+    await lineup.save();
+    res.send(lineup);
+})
+
+app.delete("/:id", async (req,res) => {
+    const {id} = req.params;
+    const response = await Lineup.deleteOne({_id: id});
+    if(response.acknowledged == true) {
+        res.status(200).send("success");
+    }else {
+        res.status(500);
+    }
 })
 
 const port = 3001;

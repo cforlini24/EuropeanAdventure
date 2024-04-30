@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-md bg-secondary p-2">
+    <nav className="navbar navbar-expand-md bg-dark-subtle p-2 sticky-top " data-bs-theme="dark">
       <div className="container-fluid">
-        <Link to={"/"} className="navbar-brand">
+        <Link to={"/"} className="navbar-brand h1 mb-0 ">
           Lini's Lineups
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -51,6 +51,11 @@ const Navbar = () => {
           <li className="nav-item">
             <Link to={"/vertigo"} className="nav-link">
               Vertigo
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/style"} className="nav-link">
+              Styling
             </Link>
           </li>
         </ul>

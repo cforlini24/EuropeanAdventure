@@ -2,49 +2,67 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PostLineup = (props) => {
+  //props
   const { fetchLineups } = props;
-  const naviagte = useNavigate();
 
+  //new instances
+  const naviagte = useNavigate();
   const reader = new FileReader();
+  
+  //loading states
   const [aimLoaded, setAimLoaded] = useState(false);
   const [posLoaded, setPosLoaded] = useState(false);
+  //input states
   const [aimPreview, setAimPreview] = useState();
   const [posPreview, setPosPreview] = useState();
   const [counterTerror, setCounterTerror] = useState();
   const [map, setMap] = useState();
   const [desc, setDesc] = useState("");
-
+  const [type, setType] = useState("");
+  const [title, setTitle] = useState("");
+  //output state
   const [errorMessage, setErrorMessage] = useState();
 
+  //load preview images
   function previewAim(e) {
     const file = e.target.files[0];
-    reader.onload = () => {
-      setAimPreview(reader.result);
-      setAimLoaded(true);
-    };
+    if(file) {
+      reader.onload = () => {
+        setAimPreview(reader.result);
+        setAimLoaded(true);
+      };
+      reader.readAsDataURL(file);
+    }
 
-    reader.readAsDataURL(file);
   }
   function previewPos(e) {
     const file = e.target.files[0];
-    reader.onload = () => {
-      setPosPreview(reader.result);
-      setPosLoaded(true);
-    };
-
-    reader.readAsDataURL(file);
+    if(file) {
+      reader.onload = () => {
+        setPosPreview(reader.result);
+        setPosLoaded(true);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
+  //post function
   async function postLineup() {
-    if (!map) {
-      setErrorMessage("Please select a map.");
-    }else if(!desc) {
-      setErrorMessage("Please provide a description.");
+    if (!title) {
+      setErrorMessage("Please enter a title.");
+    }else if(!posPreview) {
+      setErrorMessage("Please provide a position image.");
     }else if(!aimPreview) {
       setErrorMessage("Please provide an aim image.");
-    }else if(!posPreview) {
-      setErrorMessage("Please select a position image.");
-    } else {
+    } else if (!map){
+      setErrorMessage("Please select a map.");
+    } else if (!type){
+      setErrorMessage("Please select a type.");
+    } else if(counterTerror == null) {
+      setErrorMessage("Please select a side.")
+    } else if(!desc) {
+      setErrorMessage("Please provide a description.");
+    }else {
       const response = await fetch("http://localhost:3001/", {
         method: "POST",
         headers: {
@@ -56,11 +74,13 @@ const PostLineup = (props) => {
           aimImage64: aimPreview,
           posImage64: posPreview,
           desc,
+          type,
+          title
         }),
       });
       if(response.status === 200) {
         fetchLineups();
-        naviagte("/");
+        naviagte(`/${map}`);
       }else {
         setErrorMessage("Error, please see console.");
       }
@@ -68,8 +88,10 @@ const PostLineup = (props) => {
   }
 
   return (
-    <div>
+    <div data-aos="zoom-in">
       <div className="container mx-auto m-5 w-50">
+        <label for="title">Title</label>
+        <input type="text" className="mb-1 form-control " id="title" placeholder="Landing location from throwing location - e.g. Top mid from spawn" onChange={(e) => setTitle(e.target.value)}/>
         <label for="standSpot" className="mb-1 col-12">
           Position to stand
         </label>
@@ -101,7 +123,7 @@ const PostLineup = (props) => {
           ""
         )}
         <div className="row mt-2 mb-2">
-          <div className="col-6">
+          <div className="col-4">
             <select
               onChange={(e) => setMap(e.target.value)}
               className="form-select "
@@ -116,7 +138,19 @@ const PostLineup = (props) => {
               <option value="Anubis">Anubis</option>
             </select>
           </div>
-          <div className="col-6">
+          <div className="col-4">
+            <select
+              onChange={(e) => setType(e.target.value)}
+              className="form-select "
+            >
+              <option selected>Select type...</option>
+              <option value="HE">High-Explosive</option>
+              <option value="Flash">Flash</option>
+              <option value="Smoke">Smoke</option>
+              <option value="Molotov">Molotov</option>
+            </select>
+          </div>
+          <div className="col-4">
             <select
               onChange={(e) => {
                 if (e.target.value === "CT") {
@@ -135,8 +169,10 @@ const PostLineup = (props) => {
             </select>
           </div>
         </div>
+        <label for="desc">Description</label>
         <textarea
-          placeholder="Lineup description..."
+          placeholder={`Type of throw and any detials \ne.g. Left click jump throw while standing still`}
+          id="desc"
           onChange={(e) => setDesc(e.target.value)}
           className="form-control mb-2 col-12"
         ></textarea>

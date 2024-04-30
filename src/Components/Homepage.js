@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (
-    <div className="row m-5">
+    <div className="row m-5 mt-3">
       <div className="col-10">
         <h2>Maps</h2>
         <div className="row row-cols-4 g-3">
@@ -15,7 +15,7 @@ const Homepage = () => {
                   alt="Nuke poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Nuke</h2>
+                  <h1 className="card-title">Nuke</h1>
                 </div>
               </div>
             </Link>
@@ -29,7 +29,7 @@ const Homepage = () => {
                   alt="Anubis poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Anubis</h2>
+                  <h1 className="card-title">Anubis</h1>
                 </div>
               </div>
             </Link>
@@ -43,7 +43,7 @@ const Homepage = () => {
                   alt="Mirage poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Mirage</h2>
+                  <h1 className="card-title">Mirage</h1>
                 </div>
               </div>
             </Link>
@@ -57,7 +57,7 @@ const Homepage = () => {
                   alt="Ancient poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Ancient</h2>
+                  <h1 className="card-title">Ancient</h1>
                 </div>
               </div>
             </Link>
@@ -71,7 +71,7 @@ const Homepage = () => {
                   alt="Inferno poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Inferno</h2>
+                  <h1 className="card-title">Inferno</h1>
                 </div>
               </div>
             </Link>
@@ -85,7 +85,7 @@ const Homepage = () => {
                   alt="Overpass poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Overpass</h2>
+                  <h1 className="card-title">Overpass</h1>
                 </div>
               </div>
             </Link>
@@ -99,14 +99,14 @@ const Homepage = () => {
                   alt="Vertigo poster"
                 />
                 <div className="card-img-overlay text-center">
-                  <h2>Vertigo</h2>
+                  <h1 className="card-title">Vertigo</h1>
                 </div>
               </div>
             </Link>
           </div>
         </div>
       </div>
-      <div className="col-2">
+      <div className="col-2" data-aos="fade-left">
         <h2>About</h2>
         <p>
           Welcome to Lini's Lineups, the best place to learn Counter-Strike 2
@@ -117,7 +117,7 @@ const Homepage = () => {
           HE grenades.
         </p>
         <Link to={"/upload"}>
-          <button className="btn btn-outline-primary ">
+          <button className="btn btn-success p-3 ">
             <i className="bi bi-file-arrow-up mx-2"></i>
             Add your own lineup
           </button>

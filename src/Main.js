@@ -4,6 +4,8 @@ import Lineup from "./Components/Lineups";
 import PostLineup from "./Components/PostLineup";
 import Navbar from "./Components/Navbar";
 import Homepage from "./Components/Homepage";
+import EditForm from "./Components/EditForm";
+import Styling from "./Components/Styling";
 
 function Main() {
   const [lineups, setLineups] = useState();
@@ -14,6 +16,7 @@ function Main() {
   const [inferno, setInferno] = useState('');
   const [overpass, setOverpass] = useState('');
   const [vertigo, setVertigo] = useState('');
+  const [loading, setLoading] = useState(true);
 
 
     async function fetchLineups() {
@@ -21,6 +24,7 @@ function Main() {
         const repsonse = await fetch("http://localhost:3001")
         const data = await repsonse.json();
         setLineups(data);
+        setLoading(false);
       } catch (error) {
         console.log(error)
       }
@@ -52,13 +56,15 @@ function Main() {
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/upload" element={<PostLineup fetchLineups={fetchLineups}/>} />
-        <Route path="/nuke" element={<Lineup lineups={nuke} />}/>
-        <Route path="/anubis" element={<Lineup lineups={anubis} />}/>
-        <Route path="/mirage" element={<Lineup lineups={mirage} />}/>
-        <Route path="/ancient" element={<Lineup lineups={ancient} />}/>
-        <Route path="/inferno" element={<Lineup lineups={inferno} />}/>
-        <Route path="/overpass" element={<Lineup lineups={overpass} />}/>
-        <Route path="/vertigo" element={<Lineup lineups={vertigo} />}/>
+        <Route path="/nuke" element={<Lineup lineups={nuke} setLineups={setLineups} loading={loading} map={"Nuke"}/>}/>
+        <Route path="/anubis" element={<Lineup lineups={anubis}  setLineups={setLineups} loading={loading} map={"Anubis"}/>}/>
+        <Route path="/mirage" element={<Lineup lineups={mirage} setLineups={setLineups} loading={loading} map={"Mirage"}/>}/>
+        <Route path="/ancient" element={<Lineup lineups={ancient} setLineups={setLineups} loading={loading} map={"Ancient"}/>}/>
+        <Route path="/inferno" element={<Lineup lineups={inferno} setLineups={setLineups} loading={loading} map={"Inferno"}/>}/>
+        <Route path="/overpass" element={<Lineup lineups={overpass} setLineups={setLineups} loading={loading} map={"Overpass"}/>}/>
+        <Route path="/vertigo" element={<Lineup lineups={vertigo} setLineups={setLineups} loading={loading} map={"Vertigo"}/>}/>
+        <Route path="/edit/:id" element={<EditForm lineups={lineups} fetchLineups={fetchLineups} />} />
+        <Route path="/style" element={<Styling />}/>
       </Routes>
     </BrowserRouter>
   );

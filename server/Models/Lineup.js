@@ -6,7 +6,9 @@ const Lineup = new Schema({
     ct : Boolean,
     posImage64: String,
     aimImage64: String,
-    desc: String
+    desc: String,
+    type: String,
+    title: String
 })
 
 module.exports = model("lineup", Lineup);
