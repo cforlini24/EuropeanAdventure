@@ -24,7 +24,7 @@ app.get("/anubis", async (req, res) => {
     res.send(lineups)
 })
 app.get("/nuke", async (req, res) => {
-    const lineups = await Lineup.find({map: "Nuke"})
+    const lineups = await Lineup.find({map: "Nuke"}).allowDiskUse(true)
     res.send(lineups)
 })
 app.get("/Overpass", async (req, res) => {

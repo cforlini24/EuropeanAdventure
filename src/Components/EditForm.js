@@ -3,7 +3,8 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 const EditForm = (props) => {
-    const { lineups, fetchLineups } = props;
+    const { lineups,editSent,setEditSent } = props;
+    
     const { id } = useParams();
 
     const [thisLineup, setThisLineup] = useState();
@@ -89,7 +90,7 @@ const EditForm = (props) => {
                 }),
             });
             if (response.status === 200) {
-                fetchLineups();
+                setEditSent(editSent+1);
                 naviagte(`/${map}`);
             } else {
                 setErrorMessage("Error, please see console.");

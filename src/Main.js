@@ -23,8 +23,18 @@ function Main() {
   const [mirageLoading,setMirageLoading] = useState(true);
   const [nukeLoading, setNukeLoading] = useState(true);
   const [anubisLoading, setAnubisLoading] = useState(true);
+  const [editSent, setEditSent] = useState(0);
 
 
+    async function fetchAll() {
+      try {
+        const repsonse = await fetch("http://localhost:3001/")
+        const data = await repsonse.json();
+        setLineups(data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
     async function fetchNuke() {
       try {
         const repsonse = await fetch("http://localhost:3001/nuke")
@@ -96,7 +106,6 @@ function Main() {
       }
     }
 
-
     useEffect(()=> {
       fetchNuke();
       fetchOverpass();
@@ -105,7 +114,8 @@ function Main() {
       fetchMirage();
       fetchVertigo();
       fetchAnubis();
-  },[])
+      fetchAll();
+  },[editSent])
 
   // useEffect(() => {
   //   if(lineups) {
@@ -118,7 +128,7 @@ function Main() {
     <Navbar />
       <Routes>
         <Route path="/" element={<Homepage/>}/>
-        {/* <Route path="/upload" element={<PostLineup fetchLineups={fetchLineups}/>} /> */}
+        <Route path="/upload" element={<PostLineup editSent={editSent} setEditSent={setEditSent}/>} />
         <Route path="/nuke" element={<Lineup lineups={nuke} setLineups={setLineups} loading={nukeLoading} map={"Nuke"}/>}/>
         <Route path="/anubis" element={<Lineup lineups={anubis}  setLineups={setLineups} loading={anubisLoading} map={"Anubis"}/>}/>
         <Route path="/mirage" element={<Lineup lineups={mirage} setLineups={setLineups} loading={mirageLoading} map={"Mirage"}/>}/>
@@ -126,7 +136,7 @@ function Main() {
         <Route path="/inferno" element={<Lineup lineups={inferno} setLineups={setLineups} loading={infernoLoading} map={"Inferno"}/>}/>
         <Route path="/overpass" element={<Lineup lineups={overpass} setLineups={setLineups} loading={overpassLoading} map={"Overpass"}/>}/>
         <Route path="/vertigo" element={<Lineup lineups={vertigo} setLineups={setLineups} loading={vertigoLoading} map={"Vertigo"}/>}/>
-        {/* <Route path="/edit/:id" element={<EditForm lineups={lineups} fetchLineups={fetchLineups} />} /> */}
+        <Route path="/edit/:id" element={<EditForm lineups={lineups} editSent={editSent} setEditSent={setEditSent} />} />
         <Route path="/style" element={<Styling />}/>
       </Routes>
     </BrowserRouter>

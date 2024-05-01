@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const PostLineup = (props) => {
   //props
-  const { fetchLineups } = props;
+  const { editSent,setEditSent } = props;
 
   //new instances
   const naviagte = useNavigate();
@@ -79,7 +79,7 @@ const PostLineup = (props) => {
         }),
       });
       if(response.status === 200) {
-        fetchLineups();
+        setEditSent(editSent+1);
         naviagte(`/${map}`);
       }else {
         setErrorMessage("Error, please see console.");

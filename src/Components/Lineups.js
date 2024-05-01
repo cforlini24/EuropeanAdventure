@@ -17,6 +17,7 @@ const Lineup = (props) => {
     const [grenadeFilter, setGrenadeFilter] = useState("all")
     const [open, setOpen] = useState(false);
     const [lightBoxSrc, setLightBoxSrc] = useState();
+    const [hitchLoading, setHitchLoading] = useState(true);
 
     function filterCTLineups() {
         if (filteredLineups) {
@@ -55,6 +56,17 @@ const Lineup = (props) => {
         }
     }, [grenadeFilter, lineups]);
 
+    useEffect(()=> {
+        setHitchLoading(true);
+        setTimeout(()=> {
+            setHitchLoading(false)
+        },500)
+    },[props])
+
+    
+
+
+
 
     return (
         <div className="col">
@@ -75,7 +87,7 @@ const Lineup = (props) => {
                 </div>
             </div>
             {
-                loading ?
+                loading || hitchLoading ?
                     <div className="d-flex justify-content-center mt-5">
                         <div class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -84,7 +96,7 @@ const Lineup = (props) => {
                     : CTSelected ? CTLineups.length ?
                         CTLineups.map((lineup, i) => {
                             return (
-                                <div key={lineup._id} className="row mx-auto lineup-container mb-3 border-bottom border-5 border-dark  " data-aos="fade-up" data-aos-delay="200">
+                                <div key={lineup._id} className="row mx-auto lineup-container mb-3 border-bottom border-5 border-dark  " >
                                     <div className="d-flex justify-content-between ">
                                         <h2>{lineup.type == "HE" ? "High-Explosive" : lineup.type }: {lineup.title}</h2>
                                         <div>
@@ -120,7 +132,7 @@ const Lineup = (props) => {
                         : TLineups.length?
                             TLineups.map((lineup, i) => {
                                 return (
-                                    <div key={lineup._id} className="row mx-auto lineup-container mb-3 border-bottom border-5 border-dark  " data-aos="fade-up" data-aos-delay="200">
+                                    <div key={lineup._id} className="row mx-auto lineup-container mb-3 border-bottom border-5 border-dark  " >
                                         <div className="d-flex justify-content-between ">
                                         <h2>{lineup.type == "HE" ? "High-Explosive" : lineup.type }: {lineup.title}</h2>
                                             <div>
