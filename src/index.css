@@ -43,3 +43,9 @@ background: linear-gradient(51deg, rgba(103,47,140,1) 0%, rgba(156,34,34,1) 50%,
   --bs-navbar-hover-color: red;
 }
 
+.lineup-image{
+  &:hover {
+    scale: 1.01;
+  }
+}
+

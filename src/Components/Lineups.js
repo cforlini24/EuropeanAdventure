@@ -109,14 +109,14 @@ const Lineup = (props) => {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
-                                            <img src={lineup.posImage64} alt="Showing where to stand" className="img-fluid img" style={{ cursor: "pointer" }} onClick={() => {
+                                            <img src={lineup.posImage64} alt="Showing where to stand" className="img-fluid img lineup-image" style={{ cursor: "pointer" }} onClick={() => {
                                                 setOpen(true);
                                                 setLightBoxSrc([{ src: lineup.posImage64, description: lineup.desc },
                                                 { src: lineup.aimImage64, description: lineup.desc }])
                                             }} />
                                         </div>
                                         <div className="col-6 mb-1">
-                                            <img src={lineup.aimImage64} alt="Showing where to aim" className="img-fluid img" style={{ cursor: "pointer" }} onClick={() => {
+                                            <img src={lineup.aimImage64} alt="Showing where to aim" className="img-fluid img  lineup-image" style={{ cursor: "pointer" }} onClick={() => {
                                                 setOpen(true);
                                                 setLightBoxSrc([{ src: lineup.aimImage64, description: lineup.desc },
                                                 { src: lineup.posImage64, description: lineup.desc }])
@@ -145,14 +145,14 @@ const Lineup = (props) => {
                                         </div>
                                         <div className="row">
                                             <div className="col-6">
-                                                <img src={lineup.posImage64} alt="Showing where to stand" className="img-fluid img" style={{ cursor: "pointer" }} onClick={() => {
+                                                <img src={lineup.posImage64} alt="Showing where to stand" className="img-fluid img  lineup-image" style={{ cursor: "pointer" }} onClick={() => {
                                                     setOpen(true);
                                                     setLightBoxSrc([{ src: lineup.posImage64, description: lineup.desc },
                                                     { src: lineup.aimImage64, description: lineup.desc }])
                                                 }} />
                                             </div>
                                             <div className="col-6 mb-1">
-                                                <img src={lineup.aimImage64} alt="Showing where to aim" className="img-fluid img" style={{ cursor: "pointer" }} onClick={() => {
+                                                <img src={lineup.aimImage64} alt="Showing where to aim" className="img-fluid img  lineup-image" style={{ cursor: "pointer" }} onClick={() => {
                                                     setOpen(true);
                                                     setLightBoxSrc([{ src: lineup.aimImage64, description: lineup.desc },
                                                     { src: lineup.posImage64, description: lineup.desc }])
