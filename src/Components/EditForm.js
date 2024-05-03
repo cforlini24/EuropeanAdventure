@@ -25,6 +25,7 @@ const EditForm = (props) => {
     const [title, setTitle] = useState("");
     //output state
     const [errorMessage, setErrorMessage] = useState();
+    const [postLoading, setPostLoading] = useState(false)
 
     function previewAim(e) {
         const file = e.target.files[0];
@@ -74,6 +75,7 @@ const EditForm = (props) => {
         } else if (!desc) {
             setErrorMessage("Please provide a description.");
         } else {
+            setPostLoading(true);
             const response = await fetch(`http://localhost:8080/${thisLineup._id}`, {
                 method: "PATCH",
                 headers: {
@@ -107,7 +109,7 @@ const EditForm = (props) => {
 
     return (
         <div data-aos="zoom-in">
-            <div className="container mx-auto m-5 w-50">
+            <div className="container-lg mx-auto m-5">
                 <label for="title">Title</label>
                 <input type="text" className="mb-1 form-control " id="title" placeholder="Landing location from throwing location - e.g. Top mid from spawn" onChange={(e) => setTitle(e.target.value)} value={title} />
                 <label for="standSpot" className="mb-1 col-12">
@@ -193,12 +195,20 @@ const EditForm = (props) => {
                 {
                     errorMessage ? <p className="error-message">{errorMessage}</p> : ""
                 }
-                <button className="btn btn-primary" onClick={patchLineup}>
+                {
+                    postLoading ? <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div> : 
+                  <div>
+                    <button className="btn btn-primary" onClick={patchLineup}>
                     Save Edit
                 </button>
                 <button className="btn btn-secondary mx-2" onClick={() => naviagte(`/${map}`)}>
                     Cancel
                 </button>
+                </div>
+                }
+                
             </div>
         </div>
     )

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const Homepage = () => {
   return (
     <div className="row m-5 mt-3">
-      <div className="col-10">
+      <div className="col-lg-10">
         <h2>Maps</h2>
-        <div className="row row-cols-4 g-3">
+        <div className="row row-cols-lg-4 g-3 row-cols-auto">
           <div className="col "  data-aos="fade-up"  data-bs-duration="800" >
             <Link to={"/nuke"}>
               <div className="card" >
@@ -106,7 +106,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-      <div className="col-2" data-aos="fade-left">
+      <div className="col-lg-2" data-aos="fade-left">
         <h2>About</h2>
         <p>
           Welcome to Lini's Lineups, the best place to learn Counter-Strike 2
