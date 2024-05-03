@@ -129,13 +129,13 @@ function Main() {
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/upload" element={<PostLineup editSent={editSent} setEditSent={setEditSent}/>} />
-        <Route path="/nuke" element={<Lineup lineups={nuke} setLineups={setLineups} loading={nukeLoading} map={"Nuke"}/>}/>
-        <Route path="/anubis" element={<Lineup lineups={anubis}  setLineups={setLineups} loading={anubisLoading} map={"Anubis"}/>}/>
-        <Route path="/mirage" element={<Lineup lineups={mirage} setLineups={setLineups} loading={mirageLoading} map={"Mirage"}/>}/>
-        <Route path="/ancient" element={<Lineup lineups={ancient} setLineups={setLineups} loading={ancientLoading} map={"Ancient"}/>}/>
-        <Route path="/inferno" element={<Lineup lineups={inferno} setLineups={setLineups} loading={infernoLoading} map={"Inferno"}/>}/>
-        <Route path="/overpass" element={<Lineup lineups={overpass} setLineups={setLineups} loading={overpassLoading} map={"Overpass"}/>}/>
-        <Route path="/vertigo" element={<Lineup lineups={vertigo} setLineups={setLineups} loading={vertigoLoading} map={"Vertigo"}/>}/>
+        <Route path="/nuke" element={<Lineup lineups={nuke} editSent={editSent} setEditSent={setEditSent} loading={nukeLoading} map={"Nuke"}/>}/>
+        <Route path="/anubis" element={<Lineup lineups={anubis}  editSent={editSent} setEditSent={setEditSent} loading={anubisLoading} map={"Anubis"}/>}/>
+        <Route path="/mirage" element={<Lineup lineups={mirage} editSent={editSent} setEditSent={setEditSent} loading={mirageLoading} map={"Mirage"}/>}/>
+        <Route path="/ancient" element={<Lineup lineups={ancient} editSent={editSent} setEditSent={setEditSent} loading={ancientLoading} map={"Ancient"}/>}/>
+        <Route path="/inferno" element={<Lineup lineups={inferno} editSent={editSent} setEditSent={setEditSent} loading={infernoLoading} map={"Inferno"}/>}/>
+        <Route path="/overpass" element={<Lineup lineups={overpass} editSent={editSent} setEditSent={setEditSent} loading={overpassLoading} map={"Overpass"}/>}/>
+        <Route path="/vertigo" element={<Lineup lineups={vertigo} editSent={editSent} setEditSent={setEditSent} loading={vertigoLoading} map={"Vertigo"}/>}/>
         <Route path="/edit/:id" element={<EditForm lineups={lineups} editSent={editSent} setEditSent={setEditSent} />} />
         <Route path="/style" element={<Styling />}/>
       </Routes>

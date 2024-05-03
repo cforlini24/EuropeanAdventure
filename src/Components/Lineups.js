@@ -7,7 +7,7 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 
 const Lineup = (props) => {
-    const { lineups, setLineups, map, loading } = props;
+    const { lineups, setEditSent, editSent,  map, loading } = props;
     console.log(lineups)
 
 
@@ -43,7 +43,7 @@ const Lineup = (props) => {
         const reponse = await fetch(`http://localhost:8080/${id}`, {
             method: "DELETE"
         })
-        setLineups(lineups.filter((lineup) => lineup._id != id));
+        setEditSent(editSent + 1);
     }
 
 
