@@ -3,7 +3,8 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 const EditForm = (props) => {
-    const { lineups, fetchLineups } = props;
+    const { lineups,editSent,setEditSent } = props;
+    
     const { id } = useParams();
 
     const [thisLineup, setThisLineup] = useState();
@@ -73,7 +74,7 @@ const EditForm = (props) => {
         } else if (!desc) {
             setErrorMessage("Please provide a description.");
         } else {
-            const response = await fetch(`http://localhost:3001/${thisLineup._id}`, {
+            const response = await fetch(`http://localhost:8080/${thisLineup._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -89,7 +90,7 @@ const EditForm = (props) => {
                 }),
             });
             if (response.status === 200) {
-                fetchLineups();
+                setEditSent(editSent+1);
                 naviagte(`/${map}`);
             } else {
                 setErrorMessage("Error, please see console.");
