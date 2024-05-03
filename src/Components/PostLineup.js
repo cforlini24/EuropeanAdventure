@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const PostLineup = (props) => {
   //props
-  const { editSent,setEditSent } = props;
+  const { editSent, setEditSent } = props;
 
   //new instances
   const naviagte = useNavigate();
   const reader = new FileReader();
-  
+
   //loading states
   const [aimLoaded, setAimLoaded] = useState(false);
   const [posLoaded, setPosLoaded] = useState(false);
@@ -22,11 +22,12 @@ const PostLineup = (props) => {
   const [title, setTitle] = useState("");
   //output state
   const [errorMessage, setErrorMessage] = useState();
+  const [postLoading, setPostLoading] = useState(false)
 
   //load preview images
   function previewAim(e) {
     const file = e.target.files[0];
-    if(file) {
+    if (file) {
       reader.onload = () => {
         setAimPreview(reader.result);
         setAimLoaded(true);
@@ -37,7 +38,7 @@ const PostLineup = (props) => {
   }
   function previewPos(e) {
     const file = e.target.files[0];
-    if(file) {
+    if (file) {
       reader.onload = () => {
         setPosPreview(reader.result);
         setPosLoaded(true);
@@ -50,20 +51,22 @@ const PostLineup = (props) => {
   async function postLineup() {
     if (!title) {
       setErrorMessage("Please enter a title.");
-    }else if(!posPreview) {
+    } else if (!posPreview) {
       setErrorMessage("Please provide a position image.");
-    }else if(!aimPreview) {
+    } else if (!aimPreview) {
       setErrorMessage("Please provide an aim image.");
-    } else if (!map){
+    } else if (!map) {
       setErrorMessage("Please select a map.");
-    } else if (!type){
+    } else if (!type) {
       setErrorMessage("Please select a type.");
-    } else if(counterTerror == null) {
+    } else if (counterTerror == null) {
       setErrorMessage("Please select a side.")
-    } else if(!desc) {
+    } else if (!desc) {
       setErrorMessage("Please provide a description.");
-    }else {
-      const response = await fetch("http://localhost:3001/", {
+    } else {
+      console.log("Posting...")
+      setPostLoading(true);
+      const response = await fetch("http://localhost:8080/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,10 +81,11 @@ const PostLineup = (props) => {
           title
         }),
       });
-      if(response.status === 200) {
-        setEditSent(editSent+1);
+      if (response.status === 200) {
+        setPostLoading(false);
+        setEditSent(editSent + 1);
         naviagte(`/${map}`);
-      }else {
+      } else {
         setErrorMessage("Error, please see console.");
       }
     }
@@ -91,7 +95,7 @@ const PostLineup = (props) => {
     <div data-aos="zoom-in">
       <div className="container mx-auto m-5 w-50">
         <label for="title">Title</label>
-        <input type="text" className="mb-1 form-control " id="title" placeholder="Landing location from throwing location - e.g. Top mid from spawn" onChange={(e) => setTitle(e.target.value)}/>
+        <input type="text" className="mb-1 form-control " id="title" placeholder="Landing location from throwing location - e.g. Top mid from spawn" onChange={(e) => setTitle(e.target.value)} />
         <label for="standSpot" className="mb-1 col-12">
           Position to stand
         </label>
@@ -179,9 +183,14 @@ const PostLineup = (props) => {
         {
           errorMessage ? <p className="error-message">{errorMessage}</p> : ""
         }
-        <button onClick={postLineup} className="btn btn-primary">
-          Submit
-        </button>
+        {
+          postLoading ? <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div> : <button onClick={postLineup} className="btn btn-primary">
+            Submit
+          </button>
+        }
+
       </div>
     </div>
   );

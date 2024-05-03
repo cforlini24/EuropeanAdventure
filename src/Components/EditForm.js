@@ -74,7 +74,7 @@ const EditForm = (props) => {
         } else if (!desc) {
             setErrorMessage("Please provide a description.");
         } else {
-            const response = await fetch(`http://localhost:3001/${thisLineup._id}`, {
+            const response = await fetch(`http://localhost:8080/${thisLineup._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

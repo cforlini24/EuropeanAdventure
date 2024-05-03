@@ -28,7 +28,7 @@ function Main() {
 
     async function fetchAll() {
       try {
-        const repsonse = await fetch("http://localhost:3001/")
+        const repsonse = await fetch("http://localhost:8080/")
         const data = await repsonse.json();
         setLineups(data);
       } catch (error) {
@@ -37,7 +37,7 @@ function Main() {
     }
     async function fetchNuke() {
       try {
-        const repsonse = await fetch("http://localhost:3001/nuke")
+        const repsonse = await fetch("http://localhost:8080/nuke")
         const data = await repsonse.json();
         setNuke(data);
         setNukeLoading(false);
@@ -47,7 +47,7 @@ function Main() {
     }
     async function fetchAnubis() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Anubis")
+        const repsonse = await fetch("http://localhost:8080/Anubis")
         const data = await repsonse.json();
         setAnubis(data);
         setAnubisLoading(false);
@@ -57,7 +57,7 @@ function Main() {
     }
     async function fetchMirage() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Mirage")
+        const repsonse = await fetch("http://localhost:8080/Mirage")
         const data = await repsonse.json();
         setMirage(data);
         setMirageLoading(false);
@@ -67,7 +67,7 @@ function Main() {
     }
     async function fetchAncient() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Ancient")
+        const repsonse = await fetch("http://localhost:8080/Ancient")
         const data = await repsonse.json();
         setAncient(data);
         setAncientLoading(false);
@@ -77,7 +77,7 @@ function Main() {
     }
     async function fetchOverpass() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Overpass")
+        const repsonse = await fetch("http://localhost:8080/Overpass")
         const data = await repsonse.json();
         setOverpass(data);
         setOverpassLoading(false);
@@ -87,7 +87,7 @@ function Main() {
     }
     async function fetchInferno() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Inferno")
+        const repsonse = await fetch("http://localhost:8080/Inferno")
         const data = await repsonse.json();
         setInferno(data);
         setInfernoLoading(false);
@@ -97,7 +97,7 @@ function Main() {
     }
     async function fetchVertigo() {
       try {
-        const repsonse = await fetch("http://localhost:3001/Vertigo")
+        const repsonse = await fetch("http://localhost:8080/Vertigo")
         const data = await repsonse.json();
         setVertigo(data);
         setVertigoLoading(false);
@@ -114,7 +114,7 @@ function Main() {
       fetchMirage();
       fetchVertigo();
       fetchAnubis();
-      fetchAll();
+      fetchAll()
   },[editSent])
 
   // useEffect(() => {

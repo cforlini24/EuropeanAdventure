@@ -8,6 +8,7 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 const Lineup = (props) => {
     const { lineups, setLineups, map, loading } = props;
+    console.log(lineups)
 
 
     const [filteredLineups, setFilteredLineups] = useState(lineups);
@@ -39,7 +40,7 @@ const Lineup = (props) => {
 
 
     async function deleteLineup(id) {
-        const reponse = await fetch(`http://localhost:3001/${id}`, {
+        const reponse = await fetch(`http://localhost:8080/${id}`, {
             method: "DELETE"
         })
         setLineups(lineups.filter((lineup) => lineup._id != id));
