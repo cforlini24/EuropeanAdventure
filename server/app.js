@@ -51,6 +51,7 @@ app.get("/:map" , async (req,res) => {
     res.send(lineups)
 } )
 
+
 app.patch("/:id", async (req, res) => {
     const { id } = req.params;
     const posResponse = (await cloudinary.uploader.upload(req.body.posImage64)).url
@@ -81,10 +82,6 @@ app.delete("/:id", async (req, res) => {
     }
 })
 
-app.delete("/deleteAll", async (req, res) => {
-    const response = await Lineup.deleteMany({ map: "Nuke" });
-    res.send("success")
-})
 
 const port = 8080;
 const MONGO_URI = "mongodb+srv://cforlini24:PL6Ng6LlmdHFdLjS@cluster0.igszgpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
