@@ -37,7 +37,7 @@ function Main() {
     }
     async function fetchNuke() {
       try {
-        const repsonse = await fetch("http://localhost:8080/nuke")
+        const repsonse = await fetch("http://localhost:8080/Nuke")
         const data = await repsonse.json();
         setNuke(data);
         setNukeLoading(false);
