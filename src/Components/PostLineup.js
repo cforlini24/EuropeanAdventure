@@ -93,7 +93,7 @@ const PostLineup = (props) => {
 
   return (
     <div data-aos="zoom-in">
-      <div className="container mx-auto m-5 w-50">
+      <div className="container-lg mx-auto m-5">
         <label for="title">Title</label>
         <input type="text" className="mb-1 form-control " id="title" placeholder="Landing location from throwing location - e.g. Top mid from spawn" onChange={(e) => setTitle(e.target.value)} />
         <label for="standSpot" className="mb-1 col-12">
@@ -175,7 +175,7 @@ const PostLineup = (props) => {
         </div>
         <label for="desc">Description</label>
         <textarea
-          placeholder={`Type of throw and any detials \ne.g. Left click jump throw while standing still`}
+          placeholder={`Type of throw and any details \ne.g. Left click jump throw while standing still`}
           id="desc"
           onChange={(e) => setDesc(e.target.value)}
           className="form-control mb-2 col-12"

@@ -54,8 +54,20 @@ app.get("/:map" , async (req,res) => {
 
 app.patch("/:id", async (req, res) => {
     const { id } = req.params;
+    const posResponse = (await cloudinary.uploader.upload(req.body.posImage64)).url
+    const aimResponse = (await cloudinary.uploader.upload(req.body.aimImage64)).url
+    console.log(aimResponse, posResponse)
+    const newLineup = new Lineup({
+        map: req.body.map,
+        ct: req.body.ct,
+        aimImage64: aimResponse,
+        posImage64: posResponse,
+        desc: req.body.desc,
+        type: req.body.type,
+        title: req.body.title
+    });
     const lineup = await Lineup.findById(id);
-    lineup.overwrite(req.body);
+    lineup.overwrite(newLineup);
     await lineup.save();
     res.send(lineup);
 })
