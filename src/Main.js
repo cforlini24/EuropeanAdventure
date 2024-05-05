@@ -5,7 +5,7 @@ import PostLineup from "./Components/PostLineup";
 import Navbar from "./Components/Navbar";
 import Homepage from "./Components/Homepage";
 import EditForm from "./Components/EditForm";
-import Styling from "./Components/Styling";
+
 
 function Main() {
   const [lineups, setLineups] = useState();
@@ -137,7 +137,6 @@ function Main() {
         <Route path="/overpass" element={<Lineup lineups={overpass} editSent={editSent} setEditSent={setEditSent} loading={overpassLoading} map={"Overpass"}/>}/>
         <Route path="/vertigo" element={<Lineup lineups={vertigo} editSent={editSent} setEditSent={setEditSent} loading={vertigoLoading} map={"Vertigo"}/>}/>
         <Route path="/edit/:id" element={<EditForm lineups={lineups} editSent={editSent} setEditSent={setEditSent} />} />
-        <Route path="/style" element={<Styling />}/>
       </Routes>
     </BrowserRouter>
   );

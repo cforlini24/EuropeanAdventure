@@ -53,11 +53,6 @@ const Navbar = () => {
               Vertigo
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to={"/style"} className="nav-link">
-              Styling
-            </Link>
-          </li>
         </ul>
         </div>
       </div>

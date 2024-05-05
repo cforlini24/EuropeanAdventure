@@ -103,7 +103,7 @@ const Lineup = (props) => {
                             : CTSelected ? CTLineups.length ?
                                 CTLineups.map((lineup, i) => {
                                     return (
-                                        <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3" >
+                                        <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3"  data-aos="fade-in" data-aos-delay="250">
                                             <div className="d-flex justify-content-between ">
                                                 <h2>{ grenadeFilter == "all" ? lineup.type == "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
                                                 <div className="">
@@ -139,7 +139,7 @@ const Lineup = (props) => {
                                 : TLineups.length ?
                                     TLineups.map((lineup, i) => {
                                         return (
-                                            <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3" >
+                                            <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3" data-aos="fade-in" data-aos-delay="250">
                                             <div className="d-flex justify-content-between ">
                                                 <h2>{ grenadeFilter == "all" ? lineup.type == "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
                                                 <div className="">

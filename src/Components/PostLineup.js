@@ -133,13 +133,13 @@ const PostLineup = (props) => {
               className="form-select "
             >
               <option selected>Select map...</option>
-              <option value="Mirage">Mirage</option>
-              <option value="Inferno">Inferno</option>
-              <option value="Nuke">Nuke</option>
-              <option value="Vertigo">Vertigo</option>
               <option value="Ancient">Ancient</option>
-              <option value="Overpass">Overpass</option>
               <option value="Anubis">Anubis</option>
+              <option value="Inferno">Inferno</option>
+              <option value="Mirage">Mirage</option>
+              <option value="Nuke">Nuke</option>
+              <option value="Overpass">Overpass</option>
+              <option value="Vertigo">Vertigo</option>
             </select>
           </div>
           <div className="col-4">
@@ -148,10 +148,10 @@ const PostLineup = (props) => {
               className="form-select "
             >
               <option selected>Select type...</option>
-              <option value="HE">High-Explosive</option>
               <option value="Flash">Flash</option>
-              <option value="Smoke">Smoke</option>
+              <option value="HE">High-Explosive</option>
               <option value="Molotov">Molotov</option>
+              <option value="Smoke">Smoke</option>
             </select>
           </div>
           <div className="col-4">

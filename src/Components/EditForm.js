@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 const EditForm = (props) => {
-    const { lineups,editSent,setEditSent } = props;
-    
+    const { lineups, editSent, setEditSent } = props;
+
     const { id } = useParams();
 
     const [thisLineup, setThisLineup] = useState();
@@ -92,7 +92,7 @@ const EditForm = (props) => {
                 }),
             });
             if (response.status === 200) {
-                setEditSent(editSent+1);
+                setEditSent(editSent + 1);
                 naviagte(`/${map}`);
             } else {
                 setErrorMessage("Error, please see console.");
@@ -142,13 +142,13 @@ const EditForm = (props) => {
                             value={map}
                         >
                             <option selected>Select map...</option>
-                            <option value="Mirage">Mirage</option>
-                            <option value="Inferno">Inferno</option>
-                            <option value="Nuke">Nuke</option>
-                            <option value="Vertigo">Vertigo</option>
                             <option value="Ancient">Ancient</option>
-                            <option value="Overpass">Overpass</option>
                             <option value="Anubis">Anubis</option>
+                            <option value="Inferno">Inferno</option>
+                            <option value="Mirage">Mirage</option>
+                            <option value="Nuke">Nuke</option>
+                            <option value="Overpass">Overpass</option>
+                            <option value="Vertigo">Vertigo</option>
                         </select>
                     </div>
                     <div className="col-4">
@@ -158,10 +158,10 @@ const EditForm = (props) => {
                             value={type}
                         >
                             <option selected>Select type...</option>
-                            <option value="HE">High-Explosive</option>
                             <option value="Flash">Flash</option>
-                            <option value="Smoke">Smoke</option>
+                            <option value="HE">High-Explosive</option>
                             <option value="Molotov">Molotov</option>
+                            <option value="Smoke">Smoke</option>
                         </select>
                     </div>
                     <div className="col-4">
@@ -197,18 +197,18 @@ const EditForm = (props) => {
                 }
                 {
                     postLoading ? <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div> : 
-                  <div>
-                    <button className="btn btn-primary" onClick={patchLineup}>
-                    Save Edit
-                </button>
-                <button className="btn btn-secondary mx-2" onClick={() => naviagte(`/${map}`)}>
-                    Cancel
-                </button>
-                </div>
+                        <span class="visually-hidden">Loading...</span>
+                    </div> :
+                        <div>
+                            <button className="btn btn-primary" onClick={patchLineup}>
+                                Save Edit
+                            </button>
+                            <button className="btn btn-secondary mx-2" onClick={() => naviagte(`/${map}`)}>
+                                Cancel
+                            </button>
+                        </div>
                 }
-                
+
             </div>
         </div>
     )
