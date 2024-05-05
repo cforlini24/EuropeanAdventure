@@ -66,7 +66,7 @@ const PostLineup = (props) => {
     } else {
       console.log("Posting...")
       setPostLoading(true);
-      const response = await fetch("http://localhost:8080/", {
+      const response = await fetch("https://linislineups.onrender.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

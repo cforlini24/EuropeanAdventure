@@ -67,7 +67,7 @@ const EditForm = (props) => {
             setErrorMessage("Please provide a description.");
         } else {
             setPostLoading(true);
-            const response = await fetch(`http://localhost:8080/${thisLineup._id}`, {
+            const response = await fetch(`https://linislineups.onrender.com/${thisLineup._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

@@ -27,7 +27,7 @@ const Lineup = (props) => {
 
 
     async function deleteLineup(id) {
-        await fetch(`http://localhost:8080/${id}`, {
+        await fetch(`https://linislineups.onrender.com/${id}`, {
             method: "DELETE"
         })
         setEditSent(editSent + 1);
