@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Lightbox from "yet-another-react-lightbox";
-import { Captions, Thumbnails, Zoom } from "yet-another-react-lightbox/plugins";
+import { Captions, Zoom } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 
@@ -21,27 +21,13 @@ const Lineup = (props) => {
     const [lightBoxSrc, setLightBoxSrc] = useState();
     const [hitchLoading, setHitchLoading] = useState(true);
 
-    function filterCTLineups() {
-        if (filteredLineups) {
-            setCTLineups(filteredLineups.filter((lineup) => lineup.ct === true));
-            setTLineups(filteredLineups.filter((lineup) => lineup.ct === false));
-        } else {
-            setCTLineups([]);
-            setTLineups([]);
-        }
-    }
+    
 
-    function filterTypes() {
-        if (grenadeFilter == "all") {
-            setFilteredLineups(lineups);
-        } else {
-            setFilteredLineups(lineups.filter((lineup) => lineup.type == grenadeFilter))
-        }
-    }
+   
 
 
     async function deleteLineup(id) {
-        const reponse = await fetch(`http://localhost:8080/${id}`, {
+        await fetch(`http://localhost:8080/${id}`, {
             method: "DELETE"
         })
         setEditSent(editSent + 1);
@@ -49,10 +35,26 @@ const Lineup = (props) => {
 
 
     useEffect(() => {
+        function filterCTLineups() {
+            if (filteredLineups) {
+                setCTLineups(filteredLineups.filter((lineup) => lineup.ct === true));
+                setTLineups(filteredLineups.filter((lineup) => lineup.ct === false));
+            } else {
+                setCTLineups([]);
+                setTLineups([]);
+            }
+        }
         filterCTLineups();
     }, [filteredLineups])
 
     useEffect(() => {
+        function filterTypes() {
+            if (grenadeFilter === "all") {
+                setFilteredLineups(lineups);
+            } else {
+                setFilteredLineups(lineups.filter((lineup) => lineup.type === grenadeFilter))
+            }
+        }
         if (lineups) {
             filterTypes()
         }
@@ -82,11 +84,11 @@ const Lineup = (props) => {
                     <h3 className="mb-0 d-none d-lg-block" >{map}</h3>
                 </div>
                 <div className="col-lg-5 d-flex justify-content-lg-end justify-content-center">
-                    <button className={grenadeFilter == "all" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("all")}>All</button>
-                    <button className={grenadeFilter == "HE" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("HE")}>High-Explosive</button>
-                    <button className={grenadeFilter == "Smoke" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("Smoke")}>Smoke</button>
-                    <button className={grenadeFilter == "Molotov" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("Molotov")}>Molotov</button>
-                    <button className={grenadeFilter == "Flash" ? "btn btn-warning active" : "btn btn-secondary-outline"} onClick={() => setGrenadeFilter("Flash")}>Flash</button>
+                    <button className={grenadeFilter === "all" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("all")}>All</button>
+                    <button className={grenadeFilter === "HE" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("HE")}>High-Explosive</button>
+                    <button className={grenadeFilter === "Smoke" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("Smoke")}>Smoke</button>
+                    <button className={grenadeFilter === "Molotov" ? "btn btn-warning active me-2" : "btn btn-secondary-outline me-2"} onClick={() => setGrenadeFilter("Molotov")}>Molotov</button>
+                    <button className={grenadeFilter === "Flash" ? "btn btn-warning active" : "btn btn-secondary-outline"} onClick={() => setGrenadeFilter("Flash")}>Flash</button>
                 </div>
             </div>
             <div className="container-fluid p-3">
@@ -105,7 +107,7 @@ const Lineup = (props) => {
                                     return (
                                         <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3"  data-aos="fade-in" data-aos-delay="250">
                                             <div className="d-flex justify-content-between ">
-                                                <h2>{ grenadeFilter == "all" ? lineup.type == "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
+                                                <h2>{ grenadeFilter === "all" ? lineup.type === "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
                                                 <div className="">
                                                     <Link to={`/edit/${lineup._id}`} className="d-flex justify-content-end ">
                                                         <button className="btn btn-secondary"><i class="bi bi-pencil-square"></i></button>
@@ -141,7 +143,7 @@ const Lineup = (props) => {
                                         return (
                                             <div key={lineup._id} className="col-lg-3 col mb-3 m-2 p-2 px-3 rounded border border-dark border-3" data-aos="fade-in" data-aos-delay="250">
                                             <div className="d-flex justify-content-between ">
-                                                <h2>{ grenadeFilter == "all" ? lineup.type == "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
+                                                <h2>{ grenadeFilter === "all" ? lineup.type === "HE" ? "High-Explosive:" : lineup.type+":" : ""} {lineup.title}</h2>
                                                 <div className="">
                                                     <Link to={`/edit/${lineup._id}`} className="d-flex justify-content-end ">
                                                         <button className="btn btn-secondary"><i class="bi bi-pencil-square"></i></button>

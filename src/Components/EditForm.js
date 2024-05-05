@@ -13,8 +13,8 @@ const EditForm = (props) => {
     const reader = new FileReader();
 
     //loading states
-    const [aimLoaded, setAimLoaded] = useState(false);
-    const [posLoaded, setPosLoaded] = useState(false);
+    const [aimLoaded, setAimLoaded] = useState(true);
+    const [posLoaded, setPosLoaded] = useState(true);
     //input states
     const [aimPreview, setAimPreview] = useState();
     const [posPreview, setPosPreview] = useState();
@@ -28,6 +28,7 @@ const EditForm = (props) => {
     const [postLoading, setPostLoading] = useState(false)
 
     function previewAim(e) {
+        setAimLoaded(false)
         const file = e.target.files[0];
         reader.onload = () => {
             setAimPreview(reader.result);
@@ -37,6 +38,7 @@ const EditForm = (props) => {
         reader.readAsDataURL(file);
     }
     function previewPos(e) {
+        setPosLoaded(false)
         const file = e.target.files[0];
         reader.onload = () => {
             setPosPreview(reader.result);
@@ -46,18 +48,7 @@ const EditForm = (props) => {
         reader.readAsDataURL(file);
     }
 
-    function filterLineups() {
-        const filteredLineupVar = lineups.filter((lineup) => lineup._id === id)[0]
-        setThisLineup(filteredLineupVar);
-        setCounterTerror(filteredLineupVar.ct);
-        setMap(filteredLineupVar.map);
-        setDesc(filteredLineupVar.desc);
-        setTitle(filteredLineupVar.title);
-        setDesc(filteredLineupVar.desc);
-        setType(filteredLineupVar.type);
-        setAimPreview(filteredLineupVar.aimImage64);
-        setPosPreview(filteredLineupVar.posImage64);
-    }
+    
 
     async function patchLineup() {
         if (!title) {
@@ -101,10 +92,22 @@ const EditForm = (props) => {
     }
 
     useEffect(() => {
+        function filterLineups() {
+            const filteredLineupVar = lineups.filter((lineup) => lineup._id === id)[0]
+            setThisLineup(filteredLineupVar);
+            setCounterTerror(filteredLineupVar.ct);
+            setMap(filteredLineupVar.map);
+            setDesc(filteredLineupVar.desc);
+            setTitle(filteredLineupVar.title);
+            setDesc(filteredLineupVar.desc);
+            setType(filteredLineupVar.type);
+            setAimPreview(filteredLineupVar.aimImage64);
+            setPosPreview(filteredLineupVar.posImage64);
+        }
         if (lineups) {
             filterLineups();
         }
-    }, [lineups]);
+    }, [lineups, id]);
 
 
     return (
@@ -122,7 +125,9 @@ const EditForm = (props) => {
                     id="standSpot"
                     name="standSpot"
                 />
-                <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position preview" />
+                {
+                    posLoaded ? <img src={posPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position preview" /> : ""
+                }
                 <label for="aimSpot" className="mb-1 col-12">
                     Position to aim
                 </label>
@@ -133,7 +138,7 @@ const EditForm = (props) => {
                     name="aimSpot"
                     id="aimSpot"
                 />
-                <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" alt="Uploaded aim preview" />
+                {aimLoaded ? <img src={aimPreview} className="img-thumbnail img-fluid mb-1 col-12" alt="Uploaded aim preview" /> : "" }
                 <div className="row mt-2 mb-2">
                     <div className="col-4">
                         <select
