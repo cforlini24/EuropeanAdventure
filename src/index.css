@@ -17,35 +17,21 @@
   }
 }
 
-
-.card-title{
+.card-title {
   font-size: 4rem;
 }
 
 body {
-  background: rgb(103,47,140);
   min-height: 100vh;
-background: linear-gradient(51deg, rgba(103,47,140,1) 0%, rgba(156,34,34,1) 50%, rgba(184,128,51,1) 100%);
+  background: rgb(48, 32, 58) 0%;
   color: white;
 }
 
-
-.error-message{
-  color: red
-}
-
-.img{
-  box-shadow: 2px 2px 5px black;
+.error-message {
+  color: red;
 }
 
 .navbar {
   --bs-navbar-active-color: red;
   --bs-navbar-hover-color: red;
 }
-
-.lineup-image{
-  &:hover {
-    scale: 1.01;
-  }
-}
-

@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const Lineup = require("./Models/Lineup");
+const Post = require("./Models/Post");
 const cloudinary = require('cloudinary').v2;
+const moment = require("moment")
 
 const app = express();
 
@@ -18,21 +19,40 @@ app.use(express.json({ limit: "50mb" }));
 
 app.post("/", async (req, res) => {
     try {
-        const posResponse = (await cloudinary.uploader.upload(req.body.posImage64)).url
-        const aimResponse = (await cloudinary.uploader.upload(req.body.aimImage64)).url
-        console.log(aimResponse, posResponse)
-        const lineup = new Lineup({
-            map: req.body.map,
-            ct: req.body.ct,
-            aimImage64: aimResponse,
-            posImage64: posResponse,
-            desc: req.body.desc,
-            type: req.body.type,
-            title: req.body.title
-        });
-        const response = await lineup.save()
-        console.log(response)
-        res.status(200).send();
+        const photos = req.body.photos;
+        const promises = photos.map((photo) => cloudinary.uploader.upload(photo));
+        const uploads = await Promise.all(promises)
+
+        const links = uploads.map((upload) => upload.url)
+
+        const post = new Post({
+            title: req.body.title,
+            body: req.body.message,
+            photos: links,
+            date: moment()
+        })
+
+
+        await post.save();
+
+        res.status(200).send()
+
+
+        // const posResponse = (await cloudinary.uploader.upload(req.body.posImage64)).url
+        // const aimResponse = (await cloudinary.uploader.upload(req.body.aimImage64)).url
+        // console.log(aimResponse, posResponse)
+        // const lineup = new Lineup({
+        //     map: req.body.map,
+        //     ct: req.body.ct,
+        //     aimImage64: aimResponse,
+        //     posImage64: posResponse,
+        //     desc: req.body.desc,
+        //     type: req.body.type,
+        //     title: req.body.title
+        // });
+        // const response = await lineup.save()
+        // console.log(response)
+        // res.status(200).send();
     } catch (error) {
         console.log(error);
         res.send(error)
@@ -40,16 +60,16 @@ app.post("/", async (req, res) => {
 })
 
 app.get("/", async (req, res) => {
-    console.log("Getting all lineups")
-    const lineups = await Lineup.find()
-    res.send(lineups)
+    console.log("Getting all posts")
+    const posts = await Post.find()
+    res.send(posts)
 })
 
-app.get("/:map" , async (req,res) => {
+app.get("/:map", async (req, res) => {
     const map = req.params.map
     const lineups = await Lineup.find({ map })
     res.send(lineups)
-} )
+})
 
 
 app.patch("/:id", async (req, res) => {
@@ -84,7 +104,8 @@ app.delete("/:id", async (req, res) => {
 
 
 const port = 8080;
-const MONGO_URI = "mongodb+srv://cforlini24:PL6Ng6LlmdHFdLjS@cluster0.igszgpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const MONGO_URI = "mongodb+srv://cforlini24:rLWNc0onoOi5ei2Z@posts.6owfb.mongodb.net/?retryWrites=true&w=majority&appName=Posts"
+//rLWNc0onoOi5ei2Z
 
 mongoose.connect(MONGO_URI).then(() => {
     app.listen(port, () => {
