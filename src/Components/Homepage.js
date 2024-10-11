@@ -1,5 +1,4 @@
 import moment from "moment";
-import { Link } from "react-router-dom";
 
 const Homepage = ({ posts }) => {
 
@@ -15,7 +14,7 @@ const Homepage = ({ posts }) => {
             {
               post.photos.map((photo, j) => {
                 return (
-                  <img className="img-fluid img rounded m-2" src={photo} key={i + " : " + j} />
+                  <img className="img-fluid img rounded m-2" src={photo} key={i + " : " + j} alt={post.title} />
                 )
               })
             }
