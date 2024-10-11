@@ -17,16 +17,17 @@ const PostLineup = (props) => {
   //output state
   const [errorMessage, setErrorMessage] = useState();
   const [postLoading, setPostLoading] = useState(false)
+  const [photoTitles, setPhotoTitles] = useState([]);
 
   //load preview images
   function previewImg(e) {
     const file = e.target.files[0];
     if (file) {
       reader.onload = () => {
-        console.log(reader.result)
         setImgPreview(reader.result);
         setImgLoaded(true);
         setPhotos([...photos, reader.result]);
+        setPhotoTitles([...photoTitles, file.name])
       };
       reader.readAsDataURL(file);
     }
@@ -64,7 +65,7 @@ const PostLineup = (props) => {
         <label for="title">Title</label>
         <input type="text" className="mb-1 form-control " id="title" placeholder="" onChange={(e) => setTitle(e.target.value)} />
         <label for="img" className="mb-1 col-12">
-          Position to stand
+          Photos ({photos.length})
         </label>
         <input
           type="file"
@@ -75,10 +76,17 @@ const PostLineup = (props) => {
           name="img"
         />
         {imgLoaded ? (
-          <img src={imgPreview} className="img-thumbnail col-12 img-fluid mb-1" alt="Uploaded position preview" />
+          <img src={imgPreview} className="img-thumbnail img img-fluid mb-1" alt="Uploaded position preview" />
         ) : (
           ""
         )}
+        {
+          photoTitles?.map((title) => {
+            return (
+              <p>{title}</p>
+            )
+          })
+        }
         <label for="desc">Message</label>
         <textarea
           placeholder={``}
